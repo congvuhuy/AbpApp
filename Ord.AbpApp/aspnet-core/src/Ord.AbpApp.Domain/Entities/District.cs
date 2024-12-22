@@ -15,6 +15,6 @@ namespace Ord.AbpApp.Entities
         public string DistrictName {  get; set; }
         public int DistrictCode {  get; set; }
         public DistrictType DistrictType { get; set; }
-        public int ProvinceID {  get; set; }
+        public int ProvinceCode {  get; set; }
     }
 }

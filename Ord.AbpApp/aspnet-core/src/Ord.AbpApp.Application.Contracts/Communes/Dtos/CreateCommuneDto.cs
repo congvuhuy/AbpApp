@@ -1,21 +1,18 @@
 ﻿using Ord.AbpApp.AddressLevel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
 
-namespace Ord.AbpApp.Entities
+namespace Ord.AbpApp.Communes.Dtos
 {
-    [Table("Commune")]
-    public class Commune:FullAuditedEntity<int>
+    public class CreateCommuneDto
     {
-        public string CommuneName {  get; set; }
+        public string CommuneName { get; set; }
         public int CommuneCode { get; set; }
         public CommuneType CommuneType { get; set; }
         public int ProvinceCode { get; set; }
-        public int DistictCode { get; set; }
+        public int DistrictCode { get; set; }
     }
 }

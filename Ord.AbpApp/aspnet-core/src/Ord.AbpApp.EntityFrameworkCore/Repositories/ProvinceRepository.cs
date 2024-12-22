@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Ord.AbpApp.Repositories
 {
-    public class ProvinceRepository : DapperRepository<AbpAppDbContext>, ITransientDependency,IProvinceRepository
+    public class ProvinceRepository : DapperRepository<AbpAppDbContext>,IProvinceRepository, ITransientDependency
     {
         public ProvinceRepository(IDbContextProvider<AbpAppDbContext> dbContextProvider) : base(dbContextProvider)
         {
@@ -30,6 +30,14 @@ namespace Ord.AbpApp.Repositories
             };
 
             return (await dbConnection.QueryAsync<Province>(sql,parameters,transaction: await GetDbTransactionAsync())).ToList();
+        }
+
+        public async Task<List<Province>> GetByCodeAsync(int code)
+        {
+            var dbConnection = await GetDbConnectionAsync();
+            var sql = @"SELECT * FROM Province WHERE ProvinceCode=@Code";
+            var parameters = new { Code = code };
+            return (await dbConnection.QueryAsync<Province>(sql, parameters, transaction:await GetDbTransactionAsync())).ToList();
         }
     }
 }

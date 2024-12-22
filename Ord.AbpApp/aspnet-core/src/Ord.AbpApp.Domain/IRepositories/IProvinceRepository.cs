@@ -13,5 +13,6 @@ namespace Ord.AbpApp.IRepositories
     public interface IProvinceRepository
     {
         Task<List<Province>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<Province>> GetByCodeAsync(int code);
     }
 }

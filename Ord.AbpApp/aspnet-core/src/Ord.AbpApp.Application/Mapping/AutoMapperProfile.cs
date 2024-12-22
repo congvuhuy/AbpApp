@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Ord.AbpApp.Entities;
 using Ord.AbpApp.Districts.Dtos;
+using Ord.AbpApp.Communes.Dtos;
 
 namespace Ord.AbpApp.Mapping
 {
@@ -31,6 +32,15 @@ namespace Ord.AbpApp.Mapping
             CreateMap<CreateDistrictDto, District>();
 
             CreateMap<UpdateDistrictDto, District>();
+
+            //Commune
+            CreateMap<CommuneDto, Commune>();
+            CreateMap<Commune, CommuneDto>();
+
+            CreateMap<CreateCommuneDto, CommuneDto>();
+            CreateMap<CreateCommuneDto, Commune>();
+
+            CreateMap<UpdateCommuneDto, Commune>();
         }
     }
 }

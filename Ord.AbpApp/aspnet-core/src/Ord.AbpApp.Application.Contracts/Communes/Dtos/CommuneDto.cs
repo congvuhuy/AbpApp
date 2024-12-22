@@ -5,21 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ord.AbpApp.Districts.Dtos
+namespace Ord.AbpApp.Communes.Dtos
 {
-    public class DistrictDto
+    public class CommuneDto
     {
         public int Id { get; set; }
-        public string DistrictName { get; set; }
-        public int DistrictCode { get; set; }
-        public DistrictType DistrictType { get; set; }
+        public string CommuneName { get; set; }
+        public int CommuneCode { get; set; }
+        public CommuneType CommuneType { get; set; }
         //public DateTime CreationTime { get; set; }
         //public DateTime? LastModificationTime { get; set; }
         //public DateTime? DeletionTime { get; set; }
         //public long? CreatorId { get; set; }
         //public long? LastModifierId { get; set; }
-        public long? DeleterId { get; set; }
+        //public long? DeleterId { get; set; }
         public bool IsDeleted { get; set; }
-        public int ProvinceCode { get; set; }
+        public int DistrictCode {  get; set; }
+        public int ProvinceCode {  get; set; }
     }
 }
