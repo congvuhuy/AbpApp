@@ -29,13 +29,14 @@ namespace Ord.AbpApp.Serivce
         private readonly IDistrictRepository _districtRepository;
         private readonly IMapper _mapper;
         private readonly IProvinceService _provinceService;
-
+        private readonly IRepository<District,int> _repository;
         public DistrictService(IDistrictRepository districtRepository, IMapper mapper, IProvinceService provinceService, IRepository<District,int> repository
             ) : base(repository) 
         {
             _districtRepository = districtRepository;
             _mapper = mapper;
             _provinceService = provinceService;
+            _repository=repository;
         }
 
 
@@ -51,17 +52,6 @@ namespace Ord.AbpApp.Serivce
             return await base.CreateAsync(input);
         }
 
-        //public override async Task<DistrictDto> UpdateAsync(int id, CreateDistrictDto input)
-        //{
-        //    var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
-        //    if (provinceCode == null)
-        //    {
-        //        throw new UserFriendlyException("Tỉnh bạn chọn không tồn tại");
-        //    }
-
-        //    return await base.UpdateAsync(id, input);
-        //}
-
         public async Task<List<DistrictDto>> GetFilterAsync(int pageNumber, int pageSize)
         {
             var districts = await _districtRepository.GetAllAsync(pageNumber, pageSize);
@@ -73,5 +63,17 @@ namespace Ord.AbpApp.Serivce
             return _mapper.Map<List<DistrictDto>>(districts);
         }
 
+        public async Task CreateMultipleAsync(List<CreateDistrictDto> districtList)
+        {
+            try
+            {
+                var districts=_mapper.Map<List<District>>(districtList);
+                    await _repository.InsertManyAsync(districts);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace Ord.AbpApp.Repositories
 
         public async Task<List<Province>> GetByCodeAsync(int code)
         {
+
             var dbConnection = await GetDbConnectionAsync();
             var sql = @"SELECT * FROM Province WHERE ProvinceCode=@Code";
             var parameters = new { Code = code };

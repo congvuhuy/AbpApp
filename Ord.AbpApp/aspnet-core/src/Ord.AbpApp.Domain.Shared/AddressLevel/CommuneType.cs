@@ -8,8 +8,8 @@ namespace Ord.AbpApp.AddressLevel
 {
     public enum CommuneType
     {
-        Phuong,
-        Xa,
-        ThiTran
+        phuong=1,
+        xa=2,
+        thitran=3
     }
 }

@@ -12,5 +12,6 @@ namespace Ord.AbpApp.Districts
     {
         public Task<List<DistrictDto>> GetFilterAsync(int pageNumber, int pageSize);
         public Task<List<DistrictDto>> GetByCode(int code);
+        Task CreateMultipleAsync(List<CreateDistrictDto> districtList);
     }
 }

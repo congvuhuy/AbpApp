@@ -32,6 +32,7 @@ namespace Ord.AbpApp.Serivce
         private readonly IMapper _mapper;
         private readonly IDistrictService _districtService;
         private readonly IProvinceService _provinceService;
+        private readonly IRepository<Commune, int> _repository;
         public CommuneService(ICommuneRepository communeRepository, IMapper mapper,IProvinceService provinceService, IDistrictService districtService, IRepository<Commune, int> repository
            ) : base(repository)
         {
@@ -39,6 +40,7 @@ namespace Ord.AbpApp.Serivce
             _mapper = mapper;
             _districtService = districtService;
             _provinceService = provinceService;
+            _repository = repository;
         }
 
         public override async Task<CommuneDto> CreateAsync(CreateCommuneDto input)
@@ -58,6 +60,20 @@ namespace Ord.AbpApp.Serivce
 
             return await base.CreateAsync(input);
         }
+        public async Task CreateMultipleAsync(List<CreateCommuneDto> communeList)
+        {
+            try
+            {
+                var communes= _mapper.Map<List<Commune>>(communeList);
+                    await _repository.InsertManyAsync(communes);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
         public async Task<List<CommuneDto>> GetFilterAsync(int pageNumber, int pageSize)
         {
             var communes = await _communeRepository.GetAllAsync(pageNumber, pageSize);

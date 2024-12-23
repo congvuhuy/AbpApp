@@ -8,9 +8,9 @@ namespace Ord.AbpApp.AddressLevel
 {
     public enum DistrictType
     {
-       Thixa,
-       ThanhPho,
-       Quan,
-       Huyen
+       thixa=1,
+       thanhPho=2,
+       quan=3,
+       huyen=4
     }
 }

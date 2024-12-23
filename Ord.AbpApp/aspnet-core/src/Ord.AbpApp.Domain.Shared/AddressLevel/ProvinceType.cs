@@ -8,7 +8,7 @@ namespace Ord.AbpApp.AddressLevel
 {
     public enum ProvinceType
     {
-        Tinh,
-        ThanhPhoTrungUong
+        tinh=1,
+        thanhphotrunguong=2
     }
 }

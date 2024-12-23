@@ -11,6 +11,7 @@ namespace Ord.AbpApp.Communes
 {
     public interface ICommuneService:IScopedDependency
     {
+        Task CreateMultipleAsync(List<CreateCommuneDto> communeList);
         public Task<List<CommuneDto>> GetFilterAsync(int pageNumber, int pageSize);
     }
 }
