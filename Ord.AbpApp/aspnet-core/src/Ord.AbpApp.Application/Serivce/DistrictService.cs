@@ -24,6 +24,7 @@ namespace Ord.AbpApp.Serivce
         DistrictDto, 
         int, 
         PagedAndSortedResultRequestDto,
+        CreateDistrictDto,
         CreateDistrictDto>, IDistrictService
     {
         private readonly IDistrictRepository _districtRepository;
@@ -43,6 +44,13 @@ namespace Ord.AbpApp.Serivce
         public override async Task<DistrictDto> CreateAsync(CreateDistrictDto input)
         {
             var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
+            var districtCode= await _districtRepository.GetByCodeAsync(input.DistrictCode);
+            if (districtCode.Any())
+            {
+                throw new AbpValidationException("Mã huyện đã tồn tại",
+                    new List<ValidationResult> { new ValidationResult("Mã huyện đã tồn tại") });
+
+            }
             if (!provinceCode.Any())
             {
                 throw new AbpValidationException("Tỉnh bạn chọn không tồn tại", 
@@ -51,7 +59,24 @@ namespace Ord.AbpApp.Serivce
 
             return await base.CreateAsync(input);
         }
+        public override async Task<DistrictDto> UpdateAsync(int id,CreateDistrictDto input)
+        {
+            var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
+            var districtCode = await _districtRepository.GetByCodeAsync(input.DistrictCode);
+            if (districtCode.Any())
+            {
+                throw new AbpValidationException("Huyện bạn chọn đã tồn tại",
+                    new List<ValidationResult> { new ValidationResult("Huyện bạn chọn đã tồn tại") });
 
+            }
+            if (!provinceCode.Any())
+            {
+                throw new AbpValidationException("Tỉnh bạn chọn không tồn tại",
+                    new List<ValidationResult> { new ValidationResult("Tỉnh bạn chọn không tồn tại") });
+            }
+
+            return await base.CreateAsync(input);
+        }
         public async Task<List<DistrictDto>> GetFilterAsync(int pageNumber, int pageSize)
         {
             var districts = await _districtRepository.GetAllAsync(pageNumber, pageSize);

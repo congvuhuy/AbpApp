@@ -33,7 +33,6 @@ namespace Ord.AbpApp.Serivce
         public async Task ImportExcelProvince(Stream excelStream)
         {
             var provinceList = new List<CreateProvinceDto>();
-            var errors = new List<string>();
             try
             {
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -41,44 +40,26 @@ namespace Ord.AbpApp.Serivce
                 {
                     var worksheet = package.Workbook.Worksheets[0];
 
-                    for (int row = 2; row <= worksheet.Dimension.End.Row-1; row++) 
+                    for (int row = 2; row <= worksheet.Dimension.End.Row - 1; row++)
                     {
-                        var provinceCodeStr = worksheet.Cells[row, 1].Text;
-                        var provinceName = worksheet.Cells[row, 2].Text;
                         var provinceTypeStr = worksheet.Cells[row, 4].Text;
-
-                        if (!int.TryParse(provinceCodeStr, out int provinceCode) || provinceCode <= 0)
-                        {
-
-                            throw new Exception(message: "Sai province code");
-                        }
-
-                        if (string.IsNullOrEmpty(provinceName) || provinceName.Length > 10)
-                        {
-                            throw new Exception(message: "Sai province name");
-                        }
-
                         var normalizedProvinceTypeStr = NormalizeString(provinceTypeStr);
-                        if (!Enum.TryParse(normalizedProvinceTypeStr, true, out ProvinceType provinceType))
-                        {
-                            errors.Add($"Row {row}: Invalid Province Type.");
-                            continue;
-                        }
+                        Enum.TryParse(normalizedProvinceTypeStr, out ProvinceType provinceType);
                         var createProvinceDto = new CreateProvinceDto
                         {
-                            ProvinceCode = provinceCode,
-                            ProvinceName = provinceName,
-                            ProvinceType = provinceType
+                            ProvinceCode = int.Parse(worksheet.Cells[row, 1].Text),
+                            ProvinceName = worksheet.Cells[row, 2].Text,
+                            ProvinceType = provinceType,
                         };
-
-
                         provinceList.Add(createProvinceDto);
                     }
-                   
+
+                    await _provinceService.CreateMultipleAsync(provinceList);
+
                 }
-               
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("", ex);
             }

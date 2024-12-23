@@ -18,6 +18,7 @@ using Ord.AbpApp.AddressLevel;
 using System.IO;
 using OfficeOpenXml;
 using System.Globalization;
+using Volo.Abp;
 
 namespace Ord.AbpApp.Serivce
 {
@@ -55,87 +56,13 @@ namespace Ord.AbpApp.Serivce
         {
             try
             {
-
                 var provinces = _mapper.Map<List<Province>>(input);
-                    await _repository.InsertManyAsync(provinces);                        
-                
+                    await _repository.InsertManyAsync(provinces);                                     
             }
             catch(Exception ex)
             {
                 throw;
             }
-        }
-
-        public async Task ImportExcel(Stream excelStream)
-        {
-            var provinceList = new List<CreateProvinceDto>();
-            var errors = new List<string>();
-            try
-            {
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                using (var package = new ExcelPackage(excelStream))
-                {
-                    var worksheet = package.Workbook.Worksheets[0];
-
-                    for (int row = 2; row <= worksheet.Dimension.End.Row - 1; row++)
-                    {
-                        var provinceCodeStr = worksheet.Cells[row, 1].Text;
-                        var provinceName = worksheet.Cells[row, 2].Text;
-                        var provinceTypeStr = worksheet.Cells[row, 4].Text;
-
-                        if (!int.TryParse(provinceCodeStr, out int provinceCode) || provinceCode <= 0)
-                        {
-
-                            throw new Exception(message: "Sai province code");
-                        }
-
-                        if (string.IsNullOrEmpty(provinceName) || provinceName.Length > 10)
-                        {
-                            throw new Exception(message: "Sai province name");
-                        }
-
-                        var normalizedProvinceTypeStr = NormalizeString(provinceTypeStr);
-                        if (!Enum.TryParse(normalizedProvinceTypeStr, true, out ProvinceType provinceType))
-                        {
-                            errors.Add($"Row {row}: Invalid Province Type.");
-                            continue;
-                        }
-                        var createProvinceDto = new CreateProvinceDto
-                        {
-                            ProvinceCode = provinceCode,
-                            ProvinceName = provinceName,
-                            ProvinceType = provinceType
-                        };
-
-
-                        provinceList.Add(createProvinceDto);
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("", ex);
-            }
-        }
-
-        public string NormalizeString(string input)
-        {
-            var normalizedString = input.Normalize(NormalizationForm.FormD);
-            var stringBuilder = new StringBuilder();
-            foreach (var c in normalizedString)
-            {
-                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-                {
-                    stringBuilder.Append(c);
-                }
-            }
-            return stringBuilder.ToString()
-                                .Normalize(NormalizationForm.FormC)
-                                .Replace(" ", string.Empty)
-                                .ToLower();
         }
     }
 }

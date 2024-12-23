@@ -15,6 +15,5 @@ namespace Ord.AbpApp.Provinces
         public Task<List<ProvinceDto>> GetFilterAll(int pageNumber, int pageSize);
 
         public Task CreateMultipleAsync(List<CreateProvinceDto> input);
-        public Task ImportExcel(Stream excelStream);
     }
 }
