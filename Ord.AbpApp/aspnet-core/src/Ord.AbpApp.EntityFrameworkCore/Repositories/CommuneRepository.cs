@@ -32,12 +32,12 @@ namespace Ord.AbpApp.Repositories
             return (await dbConnection.QueryAsync<Commune>(sql, parameters, transaction: await GetDbTransactionAsync())).ToList();
         }
 
-        public async Task<List<Commune>> GetbByCodeAsync(int code)
+        public async Task<Commune> GetByCodeAsync(int code)
         {
             var dbConnection = await GetDbConnectionAsync();
             var sql = @"SELECT * FROM Commune WHERE CommuneCode=@Code";
             var parameters = new { Code = code };
-            return (await dbConnection.QueryAsync<Commune>(sql, parameters, transaction: await GetDbTransactionAsync())).ToList();
+            return (await dbConnection.QueryFirstOrDefaultAsync<Commune>(sql, parameters, transaction: await GetDbTransactionAsync()));
         }
 
        

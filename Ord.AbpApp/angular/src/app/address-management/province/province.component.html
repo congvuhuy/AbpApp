@@ -1,0 +1,45 @@
+<div>
+  <nz-select
+    style="width: 200px;"
+    nzPlaceHolder="Chọn Tỉnh">
+    <nz-option *ngFor="let province of provinces" [nzValue]="province.provinceCode" [nzLabel]="province.provinceName"></nz-option>
+  </nz-select>
+
+
+<!--  <nz-table #basicTable [nzData]="provinces" [nzBordered]="true">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Tên Tỉnh</th>-->
+<!--      <th>Mã Tỉnh</th>-->
+<!--      <th>Thao Tác</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let province of provinces">-->
+<!--      <td>{{ province.name }}</td>-->
+<!--      <td>{{ province.code }}</td>-->
+<!--      <td>-->
+<!--        <button nz-button nzType="link" (click)="editProvince(province)">Sửa</button>-->
+<!--        <button nz-button nzType="link" nzDanger (click)="deleteProvince(province.id)">Xóa</button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </nz-table>-->
+
+<!--  <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Thông Tin Tỉnh" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">-->
+<!--    <form nz-form [formGroup]="provinceForm">-->
+<!--      <nz-form-item>-->
+<!--        <nz-form-label [nzSpan]="6">Tên Tỉnh</nz-form-label>-->
+<!--        <nz-form-control [nzSpan]="14">-->
+<!--          <input nz-input formControlName="name" />-->
+<!--        </nz-form-control>-->
+<!--      </nz-form-item>-->
+<!--      <nz-form-item>-->
+<!--        <nz-form-label [nzSpan]="6">Mã Tỉnh</nz-form-label>-->
+<!--        <nz-form-control [nzSpan]="14">-->
+<!--          <input nz-input formControlName="code" />-->
+<!--        </nz-form-control>-->
+<!--      </nz-form-item>-->
+<!--    </form>-->
+<!--  </nz-modal>-->
+</div>

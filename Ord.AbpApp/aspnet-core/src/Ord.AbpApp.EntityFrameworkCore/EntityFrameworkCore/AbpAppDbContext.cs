@@ -57,6 +57,8 @@ public class AbpAppDbContext :
     public DbSet<Province> Provinces { get; set; }
     public DbSet<District> Districts { get; set; }
     public DbSet<Commune> Communes { get; set; }
+    public DbSet<Hospital>  Hospitals { get; set; } 
+    public DbSet<Patient> Patients {  get; set; }
 
     public AbpAppDbContext(DbContextOptions<AbpAppDbContext> options)
         : base(options)

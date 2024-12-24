@@ -10,6 +10,6 @@ namespace Ord.AbpApp.IRepositories
     public interface IDistrictRepository
     {
         Task<List<District>> GetAllAsync(int pageNumber, int pageSize);
-        Task<List<District>> GetByCodeAsync(int code);
+        Task<District> GetByCodeAsync(int code);
     }
 }

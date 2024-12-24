@@ -11,6 +11,6 @@ namespace Ord.AbpApp.IRepositories
     public interface ICommuneRepository:IScopedDependency
     {
         Task<List<Commune>> GetAllAsync(int pageNumber, int pageSize);
-        Task<List<Commune>> GetbByCodeAsync(int code);
+        Task<Commune> GetByCodeAsync(int code);
     }
 }

@@ -8,6 +8,7 @@ using AutoMapper;
 using Ord.AbpApp.Entities;
 using Ord.AbpApp.Districts.Dtos;
 using Ord.AbpApp.Communes.Dtos;
+using Ord.AbpApp.Hospitals.Dtos;
 
 namespace Ord.AbpApp.Mapping
 {
@@ -41,6 +42,10 @@ namespace Ord.AbpApp.Mapping
             CreateMap<CreateCommuneDto, Commune>();
 
             CreateMap<UpdateCommuneDto, Commune>();
+            //Hospital
+            CreateMap<CreateAndUpdateHospitalDto, Hospital>();
+            CreateMap<Hospital, HospitalDto>();
+            //Patient
         }
     }
 }

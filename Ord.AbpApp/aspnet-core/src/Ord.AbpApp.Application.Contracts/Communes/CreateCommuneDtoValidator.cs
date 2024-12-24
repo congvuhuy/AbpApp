@@ -8,7 +8,7 @@ using Ord.AbpApp.Communes.Dtos;
 
 namespace Ord.AbpApp.Communes
 {
-    public class CreateCommuneDtoValidator:AbstractValidator<CommuneDto>
+    public class CreateCommuneDtoValidator:AbstractValidator<CreateCommuneDto>
     {
         public  CreateCommuneDtoValidator()
         {

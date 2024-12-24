@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+  {
+    path:'address-management',
+    loadChildren:()=>
+      import('./address-management/address-management.module').then(m=>m.AddressManagementModule)
+  }
 ];
 
 @NgModule({

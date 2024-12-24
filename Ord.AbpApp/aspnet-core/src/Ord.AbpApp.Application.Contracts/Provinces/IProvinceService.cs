@@ -11,7 +11,7 @@ namespace Ord.AbpApp.Provinces
 {
     public interface IProvinceService:IScopedDependency
     {
-        public Task<List<ProvinceDto>> GetByCode(int code);
+        public Task<ProvinceDto> GetByCode(int code);
         public Task<List<ProvinceDto>> GetFilterAll(int pageNumber, int pageSize);
 
         public Task CreateMultipleAsync(List<CreateProvinceDto> input);

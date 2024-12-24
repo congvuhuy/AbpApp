@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
@@ -97,8 +98,8 @@ namespace Ord.AbpApp.Serivce
             }
             catch (Exception ex)
             {
-                
-                throw ;
+
+                throw;
             }
 
         }
@@ -113,8 +114,9 @@ namespace Ord.AbpApp.Serivce
                 {
                     var worksheet = package.Workbook.Worksheets[0];
 
-                    for (int row = 2; row <= worksheet.Dimension.End.Row-1; row++)
-                    {
+                    //for (int row = 2; row <= worksheet.Dimension.End.Row-1; row++)
+                    for (int row = 2; row <= 600; row++)
+                        {
                         var communeTypeStr = worksheet.Cells[row, 4].Text;
                         var normalizedCommuneTypeStr = NormalizeString(communeTypeStr);
                         Enum.TryParse(normalizedCommuneTypeStr, out CommuneType communeType);
@@ -125,9 +127,15 @@ namespace Ord.AbpApp.Serivce
                             CommuneType=communeType,
                             DistrictCode = int.Parse(worksheet.Cells[row,5].Text),
                             ProvinceCode= int.Parse(worksheet.Cells[row,7].Text),
+                            
 
                         };
-                        communeList.Add(createCommuneDto);
+                        //if (createCommuneDto.CommuneCode < 0 || createCommuneDto.CommuneCode == null)
+                        //{
+                        //    throw new Exception($"Mã xã dòng {row} không hợp lệ");
+                        //}
+                        
+                            communeList.Add(createCommuneDto);
                     }
 
                     await _communeService.CreateMultipleAsync(communeList);

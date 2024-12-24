@@ -11,8 +11,8 @@ namespace Ord.AbpApp.Provinces.Dtos
     public class CreateProvinceDto
     {
        
-        public string ProvinceName { get; set; }
+        public string ProvinceName { get; set; }=string.Empty;
         public int ProvinceCode { get; set; }
-        public ProvinceType ProvinceType { get; set; }
+        public ProvinceType ProvinceType { get; set; } 
     }
 }

@@ -47,13 +47,13 @@ namespace Ord.AbpApp.Serivce
         {
             var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
             var districtCode = await _districtService.GetByCode(input.DistrictCode);
-            var communeCode = await _communeRepository.GetbByCodeAsync(input.CommuneCode);
-            if (communeCode.Any())
+            var communeCode = await _communeRepository.GetByCodeAsync(input.CommuneCode);
+            if (communeCode != null)
             {
                 throw new AbpValidationException("Mã xã đã tồn tại",
                       new List<ValidationResult> { new ValidationResult("Mã xã đã tồn tại") });
             }
-            if (!provinceCode.Any())
+            if (provinceCode != null)
             {
                 throw new AbpValidationException("Tỉnh bạn chọn không tồn tại",
                     new List<ValidationResult> { new ValidationResult("Tỉnh bạn chọn không tồn tại") });
@@ -75,7 +75,8 @@ namespace Ord.AbpApp.Serivce
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
 

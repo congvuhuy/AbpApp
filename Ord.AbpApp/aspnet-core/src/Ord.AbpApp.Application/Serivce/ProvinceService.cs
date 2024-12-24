@@ -47,10 +47,10 @@ namespace Ord.AbpApp.Serivce
             var provinceList = await _provinceRepository.GetAllAsync(pageNumber, pageSize);
             return _mapper.Map<List<Province>, List<ProvinceDto>>(provinceList);
         }
-        public async Task<List<ProvinceDto>> GetByCode(int code)
+        public async Task<ProvinceDto> GetByCode(int code)
         {
             var province = await _provinceRepository.GetByCodeAsync(code);
-            return _mapper.Map<List<ProvinceDto>>(province);
+            return _mapper.Map<ProvinceDto>(province);
         }
         public async Task CreateMultipleAsync(List<CreateProvinceDto> input)
         {

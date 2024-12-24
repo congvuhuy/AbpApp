@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ord.AbpApp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Ord.AbpApp.Migrations
 {
     [DbContext(typeof(AbpAppDbContext))]
-    partial class AbpAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241224032649_add-hospital-patient")]
+    partial class addhospitalpatient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace Ord.AbpApp.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DeletionTime");
 
-                    b.Property<int>("DistrictCode")
+                    b.Property<int>("DistictCode")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -154,11 +157,6 @@ namespace Ord.AbpApp.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("CommuneCode")
                         .HasColumnType("int");

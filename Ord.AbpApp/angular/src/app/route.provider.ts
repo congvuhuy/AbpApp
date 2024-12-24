@@ -15,6 +15,27 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/address-management/province',
+        name: 'Tỉnh',
+        iconClass: 'fa fa-address-book',
+        order: 2,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/address-management',
+        name: 'Huyện',
+        iconClass: 'fa fa-address-book',
+        order: 3,
+        layout: eLayoutType.application,
+      },
+      {
+        path: '/address-management',
+        name: 'Xã',
+        iconClass: 'fa fa-address-book',
+        order: 4,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

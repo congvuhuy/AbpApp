@@ -32,12 +32,12 @@ namespace Ord.AbpApp.Repositories
             return (await dbConnection.QueryAsync<District>(sql, parameters, transaction: await GetDbTransactionAsync())).ToList();
         }
 
-        public async Task<List<District>> GetByCodeAsync(int code)
+        public async Task<District> GetByCodeAsync(int code)
         {
             var dbConnection = await GetDbConnectionAsync();
             var sql = @"SELECT * FROM District WHERE DistrictCode=@Code";
             var parameters = new { Code = code };
-            return (await dbConnection.QueryAsync<District>(sql, parameters, transaction: await GetDbTransactionAsync())).ToList();
+            return (dbConnection.QueryFirstOrDefault<District>(sql, parameters, transaction: await GetDbTransactionAsync()));
         }
     }
 }

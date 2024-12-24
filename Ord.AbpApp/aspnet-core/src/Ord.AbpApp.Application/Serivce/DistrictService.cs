@@ -45,13 +45,13 @@ namespace Ord.AbpApp.Serivce
         {
             var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
             var districtCode= await _districtRepository.GetByCodeAsync(input.DistrictCode);
-            if (districtCode.Any())
+            if (districtCode!=null)
             {
                 throw new AbpValidationException("Mã huyện đã tồn tại",
                     new List<ValidationResult> { new ValidationResult("Mã huyện đã tồn tại") });
 
             }
-            if (!provinceCode.Any())
+            if (provinceCode != null)
             {
                 throw new AbpValidationException("Tỉnh bạn chọn không tồn tại", 
                     new List<ValidationResult> { new ValidationResult("Tỉnh bạn chọn không tồn tại") });
@@ -63,13 +63,13 @@ namespace Ord.AbpApp.Serivce
         {
             var provinceCode = await _provinceService.GetByCode(input.ProvinceCode);
             var districtCode = await _districtRepository.GetByCodeAsync(input.DistrictCode);
-            if (districtCode.Any())
+            if (districtCode != null)
             {
                 throw new AbpValidationException("Huyện bạn chọn đã tồn tại",
                     new List<ValidationResult> { new ValidationResult("Huyện bạn chọn đã tồn tại") });
 
             }
-            if (!provinceCode.Any())
+            if (provinceCode!=null)
             {
                 throw new AbpValidationException("Tỉnh bạn chọn không tồn tại",
                     new List<ValidationResult> { new ValidationResult("Tỉnh bạn chọn không tồn tại") });

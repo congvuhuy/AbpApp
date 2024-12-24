@@ -9,7 +9,7 @@ namespace Ord.AbpApp.Communes.Dtos
 {
     public class CreateCommuneDto
     {
-        public string CommuneName { get; set; }
+        public string CommuneName { get; set; } = string.Empty;
         public int CommuneCode { get; set; }
         public CommuneType CommuneType { get; set; }
         public int ProvinceCode { get; set; }
